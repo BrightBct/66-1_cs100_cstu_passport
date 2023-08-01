@@ -6,6 +6,7 @@ Welcome to CSTU Passport, a web-based form designed to create a comprehensive re
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Validation Methods](#validation-methods)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [License](#license)
@@ -25,6 +26,16 @@ CSTU Passport is a simple web form designed to collect data from university stud
 - Allows users to provide a detailed description of their work or activity.
 - Custom JavaScript validation to ensure data integrity.
 
+## Validation Methods
+
+This project demonstrates three different methods of data validation:
+
+1. **Validation with HTML5 (Frontend):** In the "validation with html5" folder, the form uses HTML5 form validation attributes like `required`, `type="email"`, etc., to perform basic client-side validation. This method leverages built-in browser validation features.
+
+2. **Validation with JavaScript (Frontend):** In the "validation with js" folder, the form utilizes a custom JavaScript script (`script.js`) to implement more complex frontend validation. It validates that the first name and last name are separated by a space, the email follows the "xxx.yyy@dome.tu.ac.th" format, the student ID has 10 digits, and the end date/time is after the start date/time.
+
+3. **Validation with Backend (Server-side):** In the "validation with backend" folder, the form includes server-side validation using backend code. Similar to the frontend JavaScript validation, it also validates the start and end date/time based on the selected Academic Year and Semester.
+
 ## Getting Started
 
 To get started with CSTU Passport, follow these steps:
@@ -34,10 +45,11 @@ To get started with CSTU Passport, follow these steps:
 
 ## Usage
 
-1. Open the `index.html` file in your web browser.
-2. Fill out the form with the required information.
-3. Click the "Submit" button to submit your data.
-4. Custom JavaScript validation will ensure the inputs are valid before submission.
+1. Choose the validation method you want to explore: "validation with html5," "validation with js," or "validation with backend."
+2. Open the respective `index.html` file in your web browser.
+3. Fill out the form with the required information.
+4. Click the "Submit" button to submit your data.
+5. The chosen validation method will perform validation on the data before submission.
 
 ## License
 
