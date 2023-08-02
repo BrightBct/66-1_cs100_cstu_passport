@@ -1,3 +1,5 @@
+/* Existing CSS styles */
+
 body {
   font-family: Arial, sans-serif;
 }
@@ -56,4 +58,16 @@ body {
 .form-group small {
   font-size: 12px;
   color: #888;
+}
+
+/* New styles for error messages */
+
+.form-group {
+  position: relative;
+}
+
+.error {
+  color: red;
+  display: block;
+  margin-top: 5px;
 }
