@@ -1,3 +1,11 @@
+<!--
+  File: index.html
+  Author: CS100 Team
+  Date Created: 23 July 2023
+  Copyright: CSTU
+  Description: HTML code of CSTU Passport that validate with JS
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +15,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Form Container -->
   <div class="form-container">
     <h1>CSTU Passport</h1>
+    <!-- Main Form -->
     <form id="myForm" action="#" method="post">
+      <!-- Firstname and Lastname Field -->
       <div class="form-group">
         <label for="fullname">Firstname and Lastname</label>
         <input type="text" id="fullname" name="fullname" />
@@ -17,6 +28,7 @@
         <span id="fullnameError" class="error"></span>
       </div>
       
+      <!-- Student ID Field -->
       <div class="form-group">
         <label for="studentID">Student ID</label>
         <input type="text" id="studentID" name="studentID" />
@@ -24,6 +36,7 @@
         <span id="studentIDError" class="error"></span>
       </div>
       
+      <!-- University Email Field -->
       <div class="form-group">
         <label for="email">University Email</label>
         <input type="email" id="email" name="email" />
@@ -31,11 +44,13 @@
         <span id="emailError" class="error"></span>
       </div>
 
+      <!-- Work/Activity Title Field -->
       <div class="form-group">
         <label for="workTitle">Work/Activity Title</label>
         <input type="text" id="workTitle" name="workTitle" />
       </div>
 
+      <!-- Type of Work/Activity Field -->
       <div class="form-group">
         <label for="activityType">Type of Work/Activity</label>
         <select id="activityType" name="activityType">
@@ -50,6 +65,7 @@
         </select>
       </div>
 
+      <!-- Academic Year Field -->
       <div class="form-group">
         <label for="academicYear">Academic Year</label>
         <select id="academicYear" name="academicYear">
@@ -60,9 +76,13 @@
           <option value="2564">2564</option>
           <option value="2565">2565</option>
           <option value="2566">2566</option>
+          <option value="2567">2567</option>
+          <option value="2568">2568</option>
+          <option value="2569">2569</option>
         </select>
       </div>
 
+      <!-- Semester Field -->
       <div class="form-group">
         <label for="semester">Semester</label>
         <select id="semester" name="semester">
@@ -73,32 +93,38 @@
         </select>
       </div>
 
+      <!-- Start Date/Time Field -->
       <div class="form-group">
         <label for="startDate">Start Date/Time</label>
         <input type="datetime-local" id="startDate" name="startDate" />
       </div>
 
+      <!-- End Date/Time Field -->
       <div class="form-group">
         <label for="endDate">End Date/Time</label>
         <input type="datetime-local" id="endDate" name="endDate" />
       </div>
 
+      <!-- Location Field -->
       <div class="form-group">
         <label for="location">Location</label>
         <input type="text" id="location" name="location" />
       </div>
 
+      <!-- Description Field -->
       <div class="form-group">
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="4"></textarea>
       </div>
 
+      <!-- Submit Button -->
       <div class="form-group">
         <input type="submit" value="Submit" />
       </div>
     </form>
   </div>
 
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
