@@ -58,25 +58,93 @@ function validateFormOnInput() {
   validateEmail();
 }
 
-// Function to submit the form
-function submitForm(event) {
-  event.preventDefault();
-  if (validateForm()) {
-    const startDateInput = document.getElementById("startDate").value;
-    const endDateInput = document.getElementById("endDate").value;
-    const startDate = new Date(startDateInput);
-    const endDate = new Date(endDateInput);
+// Function to fetch activity types from the backend
+async function fetchActivityTypes() {
+  try {
+    const response = await fetch("http://13.215.249.25:8000/getActivityType");
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Failed to fetch activity types.");
+      return [];
+    }
+  } catch (error) {
+    console.error("An error occurred while fetching activity types:", error);
+    return [];
+  }
+}
 
-    if (endDate <= startDate) {
-      alert("End datetime should be after the start datetime.");
-      return;
+// Function to populate activity types in the select element
+function populateActivityTypes(activityTypes) {
+  const activityTypeSelect = document.getElementById("activityType");
+
+  for (const type of activityTypes) {
+    const option = document.createElement("option");
+    option.value = type.id;
+    option.textContent = type.value;
+    activityTypeSelect.appendChild(option);
+  }
+}
+
+// Event listener when the page content has finished loading
+document.addEventListener("DOMContentLoaded", async () => {
+  const activityTypes = await fetchActivityTypes();
+  populateActivityTypes(activityTypes);
+});
+
+// Function to submit the form
+async function submitForm(event) {
+  event.preventDefault();
+
+  // Validate form inputs before submission
+  if (!validateName() || !validateStudentID() || !validateEmail()) {
+    return;
+  }
+
+  const startDateInput = document.getElementById("startDate").value;
+  const endDateInput = document.getElementById("endDate").value;
+  const startDate = new Date(startDateInput);
+  const endDate = new Date(endDateInput);
+
+  if (endDate <= startDate) {
+    alert("End datetime should be after the start datetime.");
+    return;
+  }
+
+  // Create the data object to send to the backend
+  const formData = new FormData(event.target);
+  const data = {
+    first_name: formData.get("fullname").split(" ")[0],
+    last_name: formData.get("fullname").split(" ")[1],
+    student_id: formData.get("studentID"),
+    email: formData.get("email"),
+    title: formData.get("workTitle"),
+    type_of_work_id: parseInt(formData.get("activityType")),
+    start_date: startDate.toISOString(),
+    end_date: endDate.toISOString(),
+    location: formData.get("location"),
+    description: formData.get("description"),
+  };
+
+  try {
+    // Send data to the backend using POST request
+    const response = await fetch("http://18.139.2.84:8000/record", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      console.log("Form data submitted successfully!");
+      document.getElementById("myForm").reset();
+    } else {
+      console.error("Failed to submit form data.");
     }
-    
-    const formData = new FormData(event.target);
-    for (const [name, value] of formData) {
-      console.log(name, value);
-    }
-    document.getElementById("myForm").reset();
+  } catch (error) {
+    console.error("An error occurred while submitting form data:", error);
   }
 }
 
