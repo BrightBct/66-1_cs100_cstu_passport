@@ -23,7 +23,7 @@ app.listen(port, () => {
 
 // Root endpoint to serve a welcome page
 app.get('/', (req, res) => {
-  res.send('<h1 style="text-align: center;">Welcome, CSTU Passport API!</h1>');
+  res.send('<h1 style="text-align: center;">Welcome to CSTU Passport backend!</h1>');
 });
 
 // POST endpoint to add a new record to the database
@@ -117,10 +117,28 @@ app.get('/getActivityType', (req, res) => {
   
       try {
         const activityTypes = JSON.parse(data);
-        return res.json(activityTypes);
+        return res.status(200).json(activityTypes);
       } catch (err) {
         console.error('Error parsing activityType.json:', err);
         return res.status(500).json({ error: 'Internal server error' });
       }
     });
+});
+
+// GET endpoint to retrieve list of passport form from 'records.json' file
+app.get('/getPassports', (req, res) => {
+  fs.readFile('databases/records.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading records.json:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+
+    try {
+      const passports = JSON.parse(data);
+      return res.status(200).json(passports);
+    } catch (err) {
+      console.error('Error parsing records.json:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 });
