@@ -44,7 +44,7 @@ app.post('/record', (req, res) => {
     // Validate that the start and end dates provided fall within the academic calendar
     const dateValidationError = validateDates(data.academic_year, data.semester, data.start_date, data.end_date);
     if (dateValidationError) {
-      return res.status(400).send(dateValidationError);
+      return res.status(400).json({message: dateValidationError});
     }
 
     // Structure the record for saving
