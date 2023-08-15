@@ -62,7 +62,7 @@ function validateFormOnInput() {
 // Function to fetch activity types from the backend
 async function fetchActivityTypes() {
   try {
-    const response = await fetch("http://localhost/getActivityType");
+    const response = await fetch("/getActivityType");
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -134,7 +134,7 @@ async function submitForm(event) {
 
   try {
     // Send data to the backend using POST request
-    const response = await fetch("http://localhost/record", {
+    const response = await fetch("/record", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -146,7 +146,7 @@ async function submitForm(event) {
       console.log("Form data submitted successfully!");
     
       // Fetch data from the backend using GET request
-      const getResponse = await fetch("http://localhost/getPassports");
+      const getResponse = await fetch("/getPassports");
       if (getResponse.ok) {
         const passports = await getResponse.json();
         // Display success message with response data
