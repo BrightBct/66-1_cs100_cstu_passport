@@ -62,7 +62,7 @@ function validateFormOnInput() {
 // Function to fetch activity types from the backend
 async function fetchActivityTypes() {
   try {
-    const response = await fetch("http://46.137.224.254/getActivityType");
+    const response = await fetch("http://localhost/getActivityType");
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -118,19 +118,23 @@ async function submitForm(event) {
   const data = {
     first_name: formData.get("fullname").split(" ")[0],
     last_name: formData.get("fullname").split(" ")[1],
-    student_id: formData.get("studentID"),
+    student_id: parseInt(formData.get("studentID")),
     email: formData.get("email"),
     title: formData.get("workTitle"),
     type_of_work_id: parseInt(formData.get("activityType")),
-    start_date: startDate.toISOString(),
-    end_date: endDate.toISOString(),
+    academic_year: parseInt(formData.get("academicYear")) - 543,
+    semester: parseInt(formData.get("semester")),
+    start_date: formData.get("startDate"),
+    end_date: formData.get("endDate"),
     location: formData.get("location"),
-    description: formData.get("description"),
+    description: formData.get("description")
   };
+
+  console.log(data);
 
   try {
     // Send data to the backend using POST request
-    const response = await fetch("http://18.139.2.84:8000/record", {
+    const response = await fetch("http://localhost/record", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -140,20 +144,24 @@ async function submitForm(event) {
 
     if (response.ok) {
       console.log("Form data submitted successfully!");
-
+    
       // Fetch data from the backend using GET request
-      const getResponse = await fetch("http://46.137.224.254/getPassports");
+      const getResponse = await fetch("http://localhost/getPassports");
       if (getResponse.ok) {
         const passports = await getResponse.json();
-        // Display data in a popup or any other way you prefer
-        alert(JSON.stringify(passports));
+        // Display success message with response data
+        alert("Submit Successfully:\n" + JSON.stringify(passports));
       } else {
-        console.error("Failed to fetch data from backend.");
+        // Display success message without response data
+        alert("Submit Successfully");
       }
-
+    
       document.getElementById("myForm").reset();
     } else {
       console.error("Failed to submit form data.");
+    
+      // Display error message
+      alert("Failed to submit form data. Please try again.");
     }
   } catch (error) {
     console.error("An error occurred while submitting form data:", error);
