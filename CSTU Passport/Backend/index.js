@@ -8,10 +8,14 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const fs = require('fs');
 
 const app = express();
 const port = 80;
+
+// Use the cors middleware
+app.use(cors());
 
 // Middleware to handle and parse JSON body of incoming requests
 app.use(bodyParser.json());
@@ -30,7 +34,7 @@ app.get('/', (req, res) => {
 // It validates the provided data and writes it to 'records.json' file
 app.post('/record', (req, res) => {
     const data = req.body;
-  
+
     // Check for mandatory fields in the incoming request
     if (!data.first_name || !data.last_name || !data.student_id || !data.email || !data.title || 
       !data.type_of_work_id || !data.academic_year || !data.semester || !data.start_date || !data.end_date || !data.location || !data.description) {
