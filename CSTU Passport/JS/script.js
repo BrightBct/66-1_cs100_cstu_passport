@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Function to submit the form
+// Function to submit the form
 async function submitForm(event) {
   event.preventDefault();
 
@@ -148,23 +149,21 @@ async function submitForm(event) {
     });
 
     if (response.ok) {
+      const responseData = await response.json();
       console.log("Form data submitted successfully!");
-    
-      // Fetch data from the backend using GET request
-      const getResponse = await fetch(config.backendUrl + "getPassports");
-      if (getResponse.ok) {
-        const passports = await getResponse.json();
-        // Display success message with response data
-        alert("Submit Successfully:\n" + JSON.stringify(passports));
-      } else {
-        // Display success message without response data
-        alert("Submit Successfully");
-      }
-    
+
+      // Format JSON data for display
+      const formattedData = Object.entries(responseData.data)
+        .map(([key, value]) => `"${key}": "${value}"`)
+        .join("\n");
+
+      // Display success message with formatted data
+      alert(responseData.message + "\n" + formattedData);
+
       document.getElementById("myForm").reset();
     } else {
       console.error("Failed to submit form data.");
-    
+
       // Display error message
       alert("Failed to submit form data. Please try again.");
     }
