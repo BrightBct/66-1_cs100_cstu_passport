@@ -43,7 +43,8 @@ function validateEmail() {
   const errorElement = document.getElementById("emailError");
 
   if (!emailPattern.test(emailInput.value)) {
-    errorElement.textContent = "Please provide a valid university email in the format 'xxx.yyy@dome.tu.ac.th'.";
+    errorElement.textContent =
+      "Please provide a valid university email in the format 'xxx.yyy@dome.tu.ac.th'.";
     return false;
   } else {
     errorElement.textContent = ""; // Clear the error message when valid
@@ -61,7 +62,7 @@ function validateFormOnInput() {
 // Function to fetch activity types from the backend
 async function fetchActivityTypes() {
   try {
-    const response = await fetch("http://13.215.249.25:8000/getActivityType");
+    const response = await fetch("http://46.137.224.254/getActivityType");
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -139,6 +140,17 @@ async function submitForm(event) {
 
     if (response.ok) {
       console.log("Form data submitted successfully!");
+
+      // Fetch data from the backend using GET request
+      const getResponse = await fetch("http://46.137.224.254/getPassports");
+      if (getResponse.ok) {
+        const passports = await getResponse.json();
+        // Display data in a popup or any other way you prefer
+        alert(JSON.stringify(passports));
+      } else {
+        console.error("Failed to fetch data from backend.");
+      }
+
       document.getElementById("myForm").reset();
     } else {
       console.error("Failed to submit form data.");
@@ -153,5 +165,7 @@ document.getElementById("myForm").addEventListener("submit", submitForm);
 
 // Event listeners for input validation on user input
 document.getElementById("fullname").addEventListener("input", validateName);
-document.getElementById("studentID").addEventListener("input", validateStudentID);
+document
+  .getElementById("studentID")
+  .addEventListener("input", validateStudentID);
 document.getElementById("email").addEventListener("input", validateEmail);
