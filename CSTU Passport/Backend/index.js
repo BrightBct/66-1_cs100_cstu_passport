@@ -75,7 +75,7 @@ app.post('/record', (req, res) => {
     // Append the new record and save back to the file
     records.push(record);
     fs.writeFileSync('databases/records.json', JSON.stringify(records, null, 2));
-    res.send('Record added successfully!');
+    res.status(200).json({message: 'Record added successfully!', data: record});
 });
 
 // Function to validate provided start and end dates
