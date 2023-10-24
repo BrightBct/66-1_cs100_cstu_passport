@@ -9,19 +9,7 @@
 const config = {
   backendUrl: "http://localhost:8000/", // Default backend URL
 };
-
-fetchAndUpdateIPAddress();
-function fetchAndUpdateIPAddress() {
-  fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-      config.backendUrl = `http://${data.ip}:8000/`;
-      console.log('Updated backendUrl:', config.backendUrl);
-    })
-    .catch(error => {
-      console.error('Error fetching the IP address:', error);
-    });
-}
+const port = 8000;
 
 // Function to validate Firstname and Lastname
 function validateName() {
@@ -79,7 +67,7 @@ function validateFormOnInput() {
 // Function to fetch activity types from the backend
 async function fetchActivityTypes() {
   try {
-    const response = await fetch(config.backendUrl + "getActivityType");
+    const response = await fetch(`http://${window.location.hostname}:${port}/getActivityType`);
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -152,7 +140,7 @@ async function submitForm(event) {
 
   try {
     // Send data to the backend using POST request
-    const response = await fetch(config.backendUrl + "record", {
+    const response = await fetch(`http://${window.location.hostname}:${port}/record`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
