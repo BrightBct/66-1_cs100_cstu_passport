@@ -10,6 +10,19 @@ const config = {
   backendUrl: "http://localhost:8000/", // Default backend URL
 };
 
+fetchAndUpdateIPAddress();
+function fetchAndUpdateIPAddress() {
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      config.backendUrl = `http://${data.ip}:8000/`;
+      console.log('Updated backendUrl:', config.backendUrl);
+    })
+    .catch(error => {
+      console.error('Error fetching the IP address:', error);
+    });
+}
+
 // Function to validate Firstname and Lastname
 function validateName() {
   const fullnameInput = document.getElementById("fullname");
