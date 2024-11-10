@@ -64,22 +64,51 @@ function validateFormOnInput() {
   validateEmail();
 }
 
-// Function to fetch activity types from the backend
-async function fetchActivityTypes() {
-  try {
-    const response = await fetch(`http://${window.location.hostname}:${port}/getActivityType`);
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      console.error("Failed to fetch activity types.");
-      return [];
-    }
-  } catch (error) {
-    console.error("An error occurred while fetching activity types:", error);
-    return [];
-  }
-}
+// // Function to fetch activity types from the backend
+// async function fetchActivityTypes() {
+//   try {
+//     console.log(`http://${window.location.hostname}:${port}/getActivityType`);
+//     const response = await fetch(`http://${window.location.hostname}:${port}/getActivityType`);
+//     if (response.ok) {
+//       const data = await response.json();
+//       return data;
+//     } else {
+//       console.error("Failed to fetch activity types.");
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("An error occurred while fetching activity types:", error);
+//     return [];
+//   }
+// }
+
+// // Function to populate activity types in the select element
+// function populateActivityTypes(activityTypes) {
+//   const activityTypeSelect = document.getElementById("activityType");
+
+//   for (const type of activityTypes) {
+//     const option = document.createElement("option");
+//     option.value = type.id;
+//     option.textContent = type.value;
+//     activityTypeSelect.appendChild(option);
+//   }
+// }
+
+// // Event listener when the page content has finished loading
+// document.addEventListener("DOMContentLoaded", async () => {
+//   const activityTypes = await fetchActivityTypes();
+//   populateActivityTypes(activityTypes);
+// });
+
+const activityTypes = [
+  { id: 'Course', value: 'Course' },
+  { id: 'Activity', value: 'Activity' },
+  { id: 'Work', value: 'Work' },
+  { id: 'Research', value: 'Research' },
+  { id: 'Sports', value: 'Sports' },
+  { id: 'Competition', value: 'Competition' },
+  { id: 'Computer Science', value: 'Computer Science' }
+];
 
 // Function to populate activity types in the select element
 function populateActivityTypes(activityTypes) {
@@ -94,8 +123,7 @@ function populateActivityTypes(activityTypes) {
 }
 
 // Event listener when the page content has finished loading
-document.addEventListener("DOMContentLoaded", async () => {
-  const activityTypes = await fetchActivityTypes();
+document.addEventListener("DOMContentLoaded", () => {
   populateActivityTypes(activityTypes);
 });
 
