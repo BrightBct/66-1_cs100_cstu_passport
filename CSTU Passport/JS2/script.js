@@ -177,8 +177,9 @@ async function submitForm(event) {
       body: JSON.stringify(data),
     });
 
+    const responseData = await response.json();
+
     if (response.ok) {
-      const responseData = await response.json();
       console.log("Form data submitted successfully!");
 
       // Format JSON data for display
@@ -191,10 +192,10 @@ async function submitForm(event) {
 
       document.getElementById("myForm").reset();
     } else {
-      console.error("Failed to submit form data.");
+      console.error("Failed to submit form data: ", responseData.message);
 
       // Display error message
-      alert("Failed to submit form data. Please try again.");
+      alert("Failed to submit form data: ", responseData.message, ', Please try again.');
     }
   } catch (error) {
     console.error("An error occurred while submitting form data:", error);

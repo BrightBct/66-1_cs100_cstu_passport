@@ -38,7 +38,8 @@ app.post('/record', (req, res) => {
     // Check for mandatory fields in the incoming request
     if (!data.first_name || !data.last_name || !data.student_id || !data.email || !data.title || 
       !data.type_of_work_id || !data.academic_year || !data.semester || !data.start_date || !data.end_date || !data.location || !data.description) {
-      return res.status(400).send('All fields are required.');
+      // return res.status(400).send('All fields are required.');
+      return res.status(400).json({message: 'All fields are required.'});
     }
   
     // Validate that the start and end dates provided fall within the academic calendar
