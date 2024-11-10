@@ -78,6 +78,7 @@ async function fetchActivityTypes() {
     }
   } catch (error) {
     console.error("An error occurred while fetching activity types:", error);
+    alert("An error occurred while fetching data, Please check server!");
     return [];
   }
 }

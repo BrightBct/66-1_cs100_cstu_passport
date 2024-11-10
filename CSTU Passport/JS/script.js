@@ -165,39 +165,44 @@ async function submitForm(event) {
   };
 
   console.log(data);
+  const formattedData = Object.entries(data)
+  .map(([key, value]) => `"${key}": "${value}"`)
+  .join("\n");
 
-  try {
-    // Send data to the backend using POST request
-    const response = await fetch(`http://${window.location.hostname}:${port}/record`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  alert(formattedData);
 
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log("Form data submitted successfully!");
+  // try {
+  //   // Send data to the backend using POST request
+  //   const response = await fetch(`http://${window.location.hostname}:${port}/record`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
 
-      // Format JSON data for display
-      const formattedData = Object.entries(responseData.data)
-        .map(([key, value]) => `"${key}": "${value}"`)
-        .join("\n");
+  //   if (response.ok) {
+  //     const responseData = await response.json();
+  //     console.log("Form data submitted successfully!");
 
-      // Display success message with formatted data
-      alert(responseData.message + "\n" + formattedData);
+  //     // Format JSON data for display
+  //     const formattedData = Object.entries(responseData.data)
+  //       .map(([key, value]) => `"${key}": "${value}"`)
+  //       .join("\n");
 
-      document.getElementById("myForm").reset();
-    } else {
-      console.error("Failed to submit form data.");
+  //     // Display success message with formatted data
+  //     alert(responseData.message + "\n" + formattedData);
 
-      // Display error message
-      alert("Failed to submit form data. Please try again.");
-    }
-  } catch (error) {
-    console.error("An error occurred while submitting form data:", error);
-  }
+  //     document.getElementById("myForm").reset();
+  //   } else {
+  //     console.error("Failed to submit form data.");
+
+  //     // Display error message
+  //     alert("Failed to submit form data. Please try again.");
+  //   }
+  // } catch (error) {
+  //   console.error("An error occurred while submitting form data:", error);
+  // }
 }
 
 // Event listener for form submission
