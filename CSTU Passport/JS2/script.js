@@ -193,9 +193,9 @@ async function submitForm(event) {
       document.getElementById("myForm").reset();
     } else {
       console.error("Failed to submit form data: ", responseData.message);
-
+      
       // Display error message
-      alert("Failed to submit form data: ", responseData.message, ', Please try again.');
+      alert(`Failed to submit form data: ${responseData.message}, Please try again.`);
     }
   } catch (error) {
     console.error("An error occurred while submitting form data:", error);
